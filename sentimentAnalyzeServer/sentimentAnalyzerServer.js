@@ -22,7 +22,6 @@ function getNLUInstance()
 }
 
 const emotionParams = {
-  'text': 'theText',
   'features': {
     'entities': {
       'emotion': true,
@@ -64,6 +63,8 @@ app.get("/url/emotion", (req,res) => {
     
     const nlu = getNLUInstance();
 
+    delete emotionParams.url;
+    delete emotionParams.text;
     emotionParams["url"] = req.query.url;
 
      console.log("Sending: " + JSON.stringify(emotionParams), null, 2);
@@ -85,6 +86,9 @@ app.get("/url/emotion", (req,res) => {
 
 app.get("/url/sentiment", (req,res) => {
     const nlu = getNLUInstance();
+
+    delete sentimentParams.url;
+    delete sentimentParams.text;  
 
     sentimentParams["url"] = req.query.url;
 
@@ -108,6 +112,9 @@ app.get("/url/sentiment", (req,res) => {
 app.get("/text/emotion", (req,res) => {
    const nlu = getNLUInstance();
 
+    delete emotionParams.url;
+    delete emotionParams.text;
+
     emotionParams["text"] = req.query.text;
 
     console.log("Sending: " + JSON.stringify(emotionParams), null, 2);
@@ -130,6 +137,8 @@ app.get("/text/emotion", (req,res) => {
 app.get("/text/sentiment", (req,res) => {
     const nlu = getNLUInstance();
 
+    delete sentimentParams.url;
+    delete sentimentParams.text; 
     sentimentParams["text"] = req.query.text;
 
     console.log("Sending: " + JSON.stringify(sentimentParams), null, 2);
